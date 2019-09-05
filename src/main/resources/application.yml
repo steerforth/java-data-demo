@@ -1,0 +1,42 @@
+project: demo
+
+#--------------spring boot配置---------------------
+
+logging:
+  level:
+    com:
+      jpz:
+        dcim:
+          gabriel: info
+  config: classpath:logback.xml
+
+
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+  banner:
+    charset: UTF-8
+  mvc:
+    static-path-pattern: /static/**
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update #新增数据库链接必备的参数
+    show-sql: false
+
+
+server:
+  port: 8000
+  servlet:
+    context-path: /${project}
+  tomcat:
+    uri-encoding: utf-8
+
+
+
