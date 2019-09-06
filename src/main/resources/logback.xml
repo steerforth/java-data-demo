@@ -56,6 +56,7 @@
    <logger name="org.springframework" level="WARN" />
     <logger name="org.hibernate" level="WARN" />
     <logger name="org.apache" level="WARN" />
+    <logger name="org.mybatis.spring" level="WARN" />
     <logger name="com.baomidou.mybatisplus" level="WARN" />
 
     <logger name="com.steer.demo" level="DEBUG" />
