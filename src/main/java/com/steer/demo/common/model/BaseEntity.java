@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.enums.FieldFill;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 /**
@@ -12,14 +15,17 @@ import java.util.Date;
  * @Description:
  * @Date: 2019-09-06 11:04
  */
+@MappedSuperclass
 public abstract class BaseEntity<T> extends Model<BaseEntity> {
     private static final long serialVersionUID = 1L;
-
-    protected String id;
+    @Id
+    private String id;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @Column(name = "create_time")
     protected Date createTime;
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    @Column(name = "update_time")
     protected Date updateTime;
 
     public String getId() {

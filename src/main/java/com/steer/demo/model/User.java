@@ -1,15 +1,13 @@
 package com.steer.demo.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.FieldFill;
+import com.steer.demo.common.model.BaseEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,21 +19,14 @@ import java.util.Date;
  */
 @TableName("sys_user")
 @Entity(name = "sys_user")
-public class User extends Model<User> {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    private String id;
+public class User extends BaseEntity<User> {
     /**
      * 状态：0为正常，9为删除
      */
     @TableField(fill = FieldFill.INSERT)
     @TableLogic
     private Integer status;
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
-    private Date createTime;
-    @TableField(value = "update_time", fill = FieldFill.UPDATE)
-    private Date updateTime;
+
     /**
      * 账户
      */
@@ -58,15 +49,6 @@ public class User extends Model<User> {
      * 备注
      */
     private String remark;
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Integer getStatus() {
         return status;
@@ -134,13 +116,13 @@ public class User extends Model<User> {
 
     @Override
     protected Serializable pkVal() {
-        return this.id;
+        return super.getId();
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", status=" + status +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

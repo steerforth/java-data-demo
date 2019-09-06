@@ -10,18 +10,18 @@ import com.steer.demo.constant.ResultEnum;
  */
 public class Result<T> {
 
-    public int code;
+    public int status;
 
     public String desc;
 
     public T data;
 
-    public static <T> Result<T> errorResult(int code){
-        return new Result<T>(code,"",null);
+    public static <T> Result<T> errorResult(int status){
+        return new Result<T>(status,"",null);
     }
 
-    public static <T> Result<T> errorResult(int code,String desc){
-        return new Result<T>(code,desc,null);
+    public static <T> Result<T> errorResult(int status,String desc){
+        return new Result<T>(status,desc,null);
     }
 
     public static <T> Result<T> successReult(){
@@ -36,26 +36,26 @@ public class Result<T> {
         return new Result<T>(ResultEnum.ok.getCode(),desc,data);
     }
 
-    public static <T> Result<T> successResult(int code,String desc,T data){
-        return new Result<T>(code,desc,data);
+    public static <T> Result<T> successResult(int status,String desc,T data){
+        return new Result<T>(status,desc,data);
     }
 
     public Result() {
         super();
     }
 
-    public Result(int code,String desc,T data) {
-        this.code = code;
+    public Result(int status, String desc, T data) {
+        this.status = status;
         this.desc = desc;
         this.data = data;
     }
 
-    public int getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getDesc() {
