@@ -26,7 +26,7 @@ public class Coupon extends BaseEntity<Coupon> {
      */
     @TableField(fill = FieldFill.INSERT)
     @TableLogic
-    private Integer status;
+    private short status;
     /**
      *优惠折扣价格
      */
@@ -61,11 +61,11 @@ public class Coupon extends BaseEntity<Coupon> {
         return super.getId();
     }
 
-    public Integer getStatus() {
+    public short getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(short status) {
         this.status = status;
     }
 

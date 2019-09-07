@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping("")
-    public Object getById(String id){
+    public Object getById(Long id){
         User entity = userService.selectById(id);
         return Result.successReult(entity);
     }

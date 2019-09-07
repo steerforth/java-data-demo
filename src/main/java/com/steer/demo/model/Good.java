@@ -25,7 +25,7 @@ public class Good extends BaseEntity<Good> {
      */
     @TableField(fill = FieldFill.INSERT)
     @TableLogic
-    private Integer status;
+    private short status;
 
     @Column(name = "vip_price")
     @TableField(value = "vip_price")
@@ -115,11 +115,11 @@ public class Good extends BaseEntity<Good> {
         this.benefit = benefit;
     }
 
-    public Integer getStatus() {
+    public short getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(short status) {
         this.status = status;
     }
 

@@ -11,4 +11,5 @@ import com.steer.demo.model.User;
  */
 public interface UserService extends IService<User> {
     User test(String name);
+    User selectByOpenid(String openid);
 }

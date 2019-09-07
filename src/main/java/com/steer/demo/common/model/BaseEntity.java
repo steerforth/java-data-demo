@@ -19,7 +19,7 @@ import java.util.Date;
 public abstract class BaseEntity<T> extends Model<BaseEntity> {
     private static final long serialVersionUID = 1L;
     @Id
-    private String id;
+    private Long id;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     @Column(name = "create_time")
@@ -28,11 +28,11 @@ public abstract class BaseEntity<T> extends Model<BaseEntity> {
     @Column(name = "update_time")
     protected Date updateTime;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

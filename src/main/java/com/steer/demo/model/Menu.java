@@ -24,7 +24,7 @@ public class Menu extends BaseEntity<Menu> {
      */
     @TableField(fill = FieldFill.INSERT)
     @TableLogic
-    private Integer status;
+    private short status;
 
     String url;
 
@@ -41,11 +41,11 @@ public class Menu extends BaseEntity<Menu> {
         return super.getId();
     }
 
-    public Integer getStatus() {
+    public short getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(short status) {
         this.status = status;
     }
 
