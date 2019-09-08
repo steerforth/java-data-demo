@@ -56,6 +56,15 @@ public class Coupon extends BaseEntity<Coupon> {
     @JSONField(name="end_time",format="yyyy.MM.dd HH:mm")
     private Date endTime;
 
+    @Column(name = "user_id")
+    @TableField(value = "user_id")
+    private long userId;
+
+    @Column(name = "is_use")
+    @TableField(value = "is_use")
+    @JSONField(name="is_use")
+    private boolean isUse;
+
     @Override
     protected Serializable pkVal() {
         return super.getId();
@@ -99,5 +108,21 @@ public class Coupon extends BaseEntity<Coupon> {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public boolean isUse() {
+        return isUse;
+    }
+
+    public void setUse(boolean use) {
+        isUse = use;
     }
 }

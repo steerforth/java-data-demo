@@ -191,4 +191,25 @@ public class Good extends BaseEntity<Good> {
     protected Serializable pkVal() {
         return super.getId();
     }
+
+    @Override
+    public String toString() {
+        return "Good{" +
+                "status=" + status +
+                ", vipPrice=" + vipPrice +
+                ", price=" + price +
+                ", otPrice=" + otPrice +
+                ", unitName='" + unitName + '\'' +
+                ", sales=" + sales +
+                ", stock=" + stock +
+                ", storeName='" + storeName + '\'' +
+                ", image='" + image + '\'' +
+                ", benefit=" + benefit +
+                ", first=" + first +
+                ", hot=" + hot +
+                ", bast=" + bast +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

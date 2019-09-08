@@ -1,6 +1,7 @@
 package com.steer.demo.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.steer.demo.dao.CouponMapper;
 import com.steer.demo.model.Coupon;
@@ -33,5 +34,13 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
         EntityWrapper wrapper = new EntityWrapper<Good>();
 //        wrapper.eq("status",0);
         return couponMapper.selectList(wrapper);
+    }
+
+    @Override
+    public Page<Coupon> selectPageByUserId(int start, int limit, long userId) {
+        Page<Coupon> page = new Page<>(start,limit);
+        EntityWrapper wrapper = new EntityWrapper<Coupon>();
+        wrapper.eq("user_id",userId);
+        return this.selectPage(page,wrapper);
     }
 }

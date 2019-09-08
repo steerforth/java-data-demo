@@ -1,6 +1,7 @@
 package com.steer.demo.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.steer.demo.dao.GoodMapper;
 import com.steer.demo.model.Good;
@@ -45,10 +46,18 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements Go
     }
 
     @Override
+    public Page<Good> selectHotsByPage(int start,int limit) {
+        Page<Good> page = new Page<>(start,limit);
+        return this.selectPage(page);
+    }
+
+    @Override
     public List<Good> selectBasts() {
         EntityWrapper wrapper = new EntityWrapper<Good>();
         wrapper.eq("bast",1);
 //        wrapper.eq("status",0);
         return goodMapper.selectList(wrapper);
     }
+
+
 }

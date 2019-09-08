@@ -11,11 +11,34 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 07/09/2019 20:54:06
+ Date: 08/09/2019 23:35:48
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for app_cart
+-- ----------------------------
+DROP TABLE IF EXISTS `app_cart`;
+CREATE TABLE `app_cart` (
+  `id` bigint(20) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `cart_num` int(11) DEFAULT NULL,
+  `good_id` bigint(20) DEFAULT NULL,
+  `status` smallint(6) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `true_price` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of app_cart
+-- ----------------------------
+BEGIN;
+INSERT INTO `app_cart` VALUES (111, NULL, NULL, 3, 5, 0, 1, 70.5);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for app_coupon
@@ -30,6 +53,8 @@ CREATE TABLE `app_coupon` (
   `end_time` datetime DEFAULT NULL,
   `status` smallint(6) DEFAULT NULL,
   `use_min_price` float DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `is_use` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -37,7 +62,7 @@ CREATE TABLE `app_coupon` (
 -- Records of app_coupon
 -- ----------------------------
 BEGIN;
-INSERT INTO `app_coupon` VALUES (1, NULL, NULL, '2019-09-05 17:02:52', 5, '2019-10-18 17:02:59', 0, 30);
+INSERT INTO `app_coupon` VALUES (1, NULL, NULL, '2019-09-05 17:02:52', 5, '2019-10-18 17:02:59', 0, 30, 1, b'0');
 COMMIT;
 
 -- ----------------------------

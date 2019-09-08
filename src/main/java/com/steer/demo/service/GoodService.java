@@ -1,5 +1,6 @@
 package com.steer.demo.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.steer.demo.model.Good;
 
@@ -28,6 +29,9 @@ public interface GoodService extends IService<Good> {
      * @return
      */
     List<Good> selectHots();
+
+    Page<Good> selectHotsByPage(int start,int limit);
+
     /**
      * 精品商品
      * @return
