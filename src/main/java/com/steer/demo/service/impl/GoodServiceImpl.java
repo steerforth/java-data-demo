@@ -24,7 +24,7 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements Go
     public List<Good> selectBenefits() {
         EntityWrapper wrapper = new EntityWrapper<Good>();
         wrapper.eq("benefit",1);
-        wrapper.eq("status",0);
+//        wrapper.eq("status",0);
         return goodMapper.selectList(wrapper);
     }
 
@@ -32,7 +32,7 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements Go
     public List<Good> selectFirsts() {
         EntityWrapper wrapper = new EntityWrapper<Good>();
         wrapper.eq("first",1);
-        wrapper.eq("status",0);
+//        wrapper.eq("status",0);
         return goodMapper.selectList(wrapper);
     }
 
@@ -40,7 +40,7 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements Go
     public List<Good> selectHots() {
         EntityWrapper wrapper = new EntityWrapper<Good>();
         wrapper.eq("hot",1);
-        wrapper.eq("status",0);
+//        wrapper.eq("status",0);
         return goodMapper.selectList(wrapper);
     }
 
@@ -48,7 +48,7 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements Go
     public List<Good> selectBasts() {
         EntityWrapper wrapper = new EntityWrapper<Good>();
         wrapper.eq("bast",1);
-        wrapper.eq("status",0);
+//        wrapper.eq("status",0);
         return goodMapper.selectList(wrapper);
     }
 }

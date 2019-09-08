@@ -1,13 +1,15 @@
 package com.steer.demo.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.steer.demo.wechat.dto.CodeDto;
 
 /**
  * wx.getUserInfo获得
  */
 public class UserInfo {
-    private CodeDto code;
+    /**
+     * 前端调用wx.login获取的登录凭证（code），有效期5分钟,用于获取session_key的参数
+     */
+    private String code;
     //"r6Nu78fJNls3bhO0XaZq3EQkGIG8eBm7KiaZMw9Torl4AyIB4b9Qc+456929rgl+TGVoYJfgCJLg7EG2pUN2HOyyX7AoSjXlr33s40u1qrDIzrRI8MQg3oaOYH7X33DP0VmZkjblhebcRexwWrGY2fiWADoTLeij9waKwSVWCy2qtRhZttFj7pa5KaIinOiosFcITndtioEH3HBg/wLRREU8z1qiNJeyW9xrqRlkkH2N3gX5H7LdNRVM32oFahVDfJB6cLmEBwQWeyYO0qje92Cf+WF0AD9hMmp1R47UPwzsqIHbP7vT451uspWNzUegfcH/99YCWeEuqOaZouL/Yix7Zyd7Wuu4PspMOQ+aO7IWCbDV6eI52VSoOy8ExsD6o07/U61esQYeZaNyifGQiovBy2WUaxSzfQvM7cw9pwcptoAdq3J7SiSavePRcRKjgVLzZPEkMbgeCh50dAk1VP3DIWM7XF7xfMpEiDXdpR8="
     /**
      * 包括敏感数据在内的完整用户信息的加密数据
@@ -41,11 +43,11 @@ public class UserInfo {
     @JSONField(name = "spread_spid")
     private long spreadSpid;
 
-    public CodeDto getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(CodeDto code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

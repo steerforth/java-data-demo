@@ -25,7 +25,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public List<Menu> selectAll() {
         EntityWrapper wrapper = new EntityWrapper<Menu>();
-        wrapper.eq("status",0);
+//        wrapper.eq("status",0);
         return menuMapper.selectList(wrapper);
     }
 }

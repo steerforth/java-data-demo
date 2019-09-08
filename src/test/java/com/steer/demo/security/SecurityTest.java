@@ -2,13 +2,16 @@ package com.steer.demo.security;
 
 import com.alibaba.fastjson.JSONObject;
 import com.steer.demo.DemoApplicationTests;
+import com.steer.demo.common.property.ApplicationProperty;
 import com.steer.demo.common.utils.AESUtil;
 import com.steer.demo.common.utils.Sha1Util;
+import com.steer.demo.dto.Session;
 import com.steer.demo.wechat.dto.UserInfoDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -19,6 +22,9 @@ public class SecurityTest extends DemoApplicationTests {
     private String sessionKey = "18idQ4oZYEEWV3gJacDNdA==";
 
     private String appid = "wx06b8d6cf5d6039ad";
+
+    @Autowired
+    private ApplicationProperty property;
 
     @Test
     public void testAES() throws Exception {
@@ -45,5 +51,14 @@ public class SecurityTest extends DemoApplicationTests {
         String sha1Data = Sha1Util.encrypt(rawData+sessionKey);
         Assert.assertEquals(signature,sha1Data);
     }
+
+    @Test
+    public void testParseSession() throws Exception {
+       byte[] b =  AESUtil.base64Decrypt("kmOJ1083lpVzhJxBYsgOQA==",property.getAesKey());
+       new String(b);
+       Session session = JSONObject.parseObject(b,Session.class,null);
+       LOGGER.info("{}",session.getUserId());
+    }
+
 
 }

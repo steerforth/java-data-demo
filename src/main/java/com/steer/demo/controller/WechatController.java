@@ -5,10 +5,7 @@ import com.steer.demo.dto.TokenDto;
 import com.steer.demo.dto.UserInfo;
 import com.steer.demo.service.WechatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +38,7 @@ public class WechatController {
      * @return
      */
     @PostMapping("/mp_auth")
-    public Object mpAuth(UserInfo userInfo) throws Exception {
+    public Object mpAuth(@RequestBody UserInfo userInfo) throws Exception {
         TokenDto dto = wechatService.authAndCheck(userInfo);
         return Result.successReult(dto);
     }

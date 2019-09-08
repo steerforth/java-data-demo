@@ -1,6 +1,7 @@
 package com.steer.demo.wechat.dto;
 
 /**
+ * 作废
  * wx.login获取
  */
 public class CodeDto {

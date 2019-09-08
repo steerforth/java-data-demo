@@ -3,6 +3,7 @@ package com.steer.demo.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.steer.demo.common.property.ApplicationProperty;
 import com.steer.demo.common.utils.AESUtil;
+import com.steer.demo.dto.Session;
 import com.steer.demo.dto.TokenDto;
 import com.steer.demo.dto.UserInfo;
 import com.steer.demo.model.User;
@@ -55,7 +56,7 @@ public class WechatServiceImpl implements WechatService {
         dto.setCacheKey("fwkkkkkk");
         dto.setExpiresTime(System.currentTimeMillis()+3600*1000*2);
         dto.setUserInfo(userInfo);
-        dto.setToken(AESUtil.base64Encrypt(String.valueOf(user.getId()).getBytes(),property.getAesKey()));
+        dto.setToken(AESUtil.base64Encrypt(JSONObject.toJSONString(Session.build(user.getId())).getBytes(),property.getAesKey()));
         return dto;
     }
 
@@ -72,6 +73,7 @@ public class WechatServiceImpl implements WechatService {
         Map<String,Object> param = new HashMap<>();
         param.put("appid",property.getWechat().getAppid());
         param.put("secret",property.getWechat().getSecret());
+        //有时候不传code?
         param.put("jsCode",userInfo.getCode());
         String res = null;
         try {

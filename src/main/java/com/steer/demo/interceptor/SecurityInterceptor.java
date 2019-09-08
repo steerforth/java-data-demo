@@ -42,7 +42,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
             if (arr.length == 2){
                 Session session = null;
                 try {
-                    session = JSONObject.parseObject(AESUtil.base64Decrypt(arr[1],property.getAesKey()),Session.class);
+                    session = JSONObject.parseObject(AESUtil.base64Decrypt(arr[1],property.getAesKey()),Session.class,null);
                     if (session != null){
                         req.setAttribute("userId",session.getUserId());
                     }

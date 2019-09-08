@@ -31,7 +31,7 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
     @Override
     public List<Coupon> selectAll() {
         EntityWrapper wrapper = new EntityWrapper<Good>();
-        wrapper.eq("status",0);
+//        wrapper.eq("status",0);
         return couponMapper.selectList(wrapper);
     }
 }
