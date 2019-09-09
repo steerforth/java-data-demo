@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @Program: demo
  * @Author: Steerforth
@@ -22,25 +24,21 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("")
+    public Object user(HttpServletRequest request){
+        if (request.getAttribute("userId") == null){
+            return Result.errorResult(-1);
+        }
+        User entity = userService.selectById((Long) request.getAttribute("userId"));
+        return Result.successReult(entity);
+    }
+
     @GetMapping("/aa/{name}")
-    public Object getByName(@PathVariable String name){
+    public Object test(@PathVariable String name){
         EntityWrapper wrapper = new EntityWrapper<>();
         wrapper.eq("name",name);
         User entity = userService.selectOne(wrapper);
         return Result.successReult(entity);
     }
-
-    @GetMapping("")
-    public Object getById(Long id){
-        User entity = userService.selectById(id);
-        return Result.successReult(entity);
-    }
-
-    @GetMapping("/test")
-    public Object test(String name){
-        User entity = userService.test(name);
-        return Result.successReult(entity);
-    }
-
 
 }

@@ -58,6 +58,13 @@ public class User extends BaseEntity<User> {
      */
     private String mobile;
     /**
+     *
+     */
+    @Column(name = "is_promoter")
+    @TableField(value = "is_promoter")
+    @JSONField(name="is_promoter")
+    private boolean isPromoter;
+    /**
      * ============微信信息=========
      */
     private String openid;
@@ -261,6 +268,14 @@ public class User extends BaseEntity<User> {
         this.spreadSpid = spreadSpid;
     }
 
+    public boolean isPromoter() {
+        return isPromoter;
+    }
+
+    public void setPromoter(boolean promoter) {
+        isPromoter = promoter;
+    }
+
     @Override
     protected Serializable pkVal() {
         return super.getId();
@@ -276,6 +291,7 @@ public class User extends BaseEntity<User> {
                 ", name='" + name + '\'' +
                 ", remark='" + remark + '\'' +
                 ", mobile='" + mobile + '\'' +
+                ", isPromoter=" + isPromoter +
                 ", openid='" + openid + '\'' +
                 ", unionid='" + unionid + '\'' +
                 ", spreadCode=" + spreadCode +
@@ -287,8 +303,6 @@ public class User extends BaseEntity<User> {
                 ", province='" + province + '\'' +
                 ", country='" + country + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
                 '}';
     }
 

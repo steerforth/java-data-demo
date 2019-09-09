@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/coupons")
+@RequestMapping("/api/coupons")
 public class CouponController {
     @Autowired
     private CouponService service;

@@ -26,7 +26,7 @@ public class MysqlGenerator {
     private static String mysql_username = "root";
     private static String mysql_password = "root";
     private static String mysql_url = "jdbc:mysql://127.0.0.1:3306/demo?characterEncoding=utf8";
-    private static String table="app_cart";                  //table名字
+    private static String table="app_good_detail";                  //table名字
     private static String prefix="app_";                     //table前缀
     private static String packageName="demo";    //文件路径
     private static String path = "/Users/steer/Desktop/logs/"+packageName;

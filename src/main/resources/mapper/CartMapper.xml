@@ -8,11 +8,11 @@
     <result column="create_time" property="createTime" />
     <result column="update_time" property="updateTime" />
         <result column="cart_num" property="cartNum" />
-        <result column="good_id" property="goodId" />
+        <result column="product_id" property="productId" />
         <result column="status" property="status" />
         <result column="true_price" property="truePrice" />
         <result column="user_id" property="userId" />
-        <association column="good_id" property="productInfo" javaType="com.steer.demo.model.Good">
+        <association column="product_id" property="productInfo" javaType="com.steer.demo.model.Good">
             <id column="id" property="id"></id>
             <result column="store_name" property="storeName"></result>
             <result column="stock" property="stock"></result>
@@ -22,7 +22,10 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        ac.id,ac.create_time,ac.update_time,ac.cart_num, ac.good_id, ac.status, ac.user_id, ac.true_price,
+        ac.id,ac.create_time,ac.update_time,ac.cart_num, ac.product_id, ac.status, ac.user_id, ac.true_price
+    </sql>
+
+    <sql id="Association_Good_Column_List">
         g.id,g.store_name,g.stock,g.image
     </sql>
 
@@ -36,7 +39,7 @@
 
     <select id="selectValidListByUser" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />,<include refid="Association_Good_Column_List" />
         FROM
         <include refid="Base_Table" />,<include refid="Good_Table" />
         WHERE
@@ -44,12 +47,12 @@
         AND
         ac.status = 0
         AND
-        ac.good_id = g.id
+        ac.product_id = g.id
     </select>
 
     <select id="selectInvalidListByUser" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List" />,<include refid="Association_Good_Column_List" />
         FROM
         <include refid="Base_Table" />,<include refid="Good_Table" />
         WHERE
@@ -57,7 +60,7 @@
         AND
         ac.status = 9
         AND
-        ac.good_id = g.id
+        ac.product_id = g.id
     </select>
 
 </mapper>

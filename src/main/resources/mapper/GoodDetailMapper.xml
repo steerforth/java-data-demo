@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.steer.demo.dao.GoodDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.steer.demo.model.GoodDetail">
+    <result column="id" property="id" />
+    <result column="create_time" property="createTime" />
+    <result column="update_time" property="updateTime" />
+        <result column="good_id" property="goodId" />
+        <result column="price_name" property="priceName" />
+        <result column="reply_count" property="replyCount" />
+        <result column="reply_chance" property="replyChance" />
+        <result column="status" property="status" />
+        <association column="good_id" property="storeInfo" javaType="com.steer.demo.model.Good">
+            <id column="id" property="id"></id>
+            <result column="vip_price" property="vipPrice"></result>
+            <result column="price" property="price"></result>
+            <result column="store_name" property="storeName"></result>
+            <result column="description" property="description"></result>
+            <result column="ot_price" property="otPrice"></result>
+            <result column="stock" property="stock"></result>
+            <result column="unit_name" property="unitName"></result>
+            <result column="sales" property="sales"></result>
+            <result column="give_integral" property="giveIntegral"></result>
+        </association>
+        <collection property="reply" ofType="com.steer.demo.model.Reply">
+            <id column="rid" property="id"></id>
+            <result column="avatar" property="avatar"></result>
+            <result column="nickname" property="nickname"></result>
+            <result column="star" property="star"></result>
+            <result column="add_time" property="addTime"></result>
+            <result column="suk" property="suk"></result>
+            <result column="comment" property="comment"></result>
+            <result column="merchant_reply_content" property="merchantReplyContent"></result>
+        </collection>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        gd.id,gd.create_time,gd.update_time,gd.good_id, gd.price_name, gd.reply_count, gd.reply_chance, gd.status
+    </sql>
+
+    <sql id="Association_Good_Column_List">
+        g.id,g.vip_price,g.price,g.store_name,g.description,g.ot_price,g.stock,g.unit_name,g.sales,g.give_integral
+    </sql>
+
+    <sql id="Association_Reply_Column_List">
+        <!-- id起别名 解决collection结果集只有一个的问题 -->
+        r.id AS rid,r.avatar,r.nickname,r.star,r.add_time,r.suk,r.comment,r.merchant_reply_content
+    </sql>
+
+    <sql id="Base_Table">
+        app_good_detail gd
+    </sql>
+
+    <sql id="Good_Table">
+        app_good g
+    </sql>
+
+    <sql id="Reply_Table">
+        app_reply r
+    </sql>
+
+    <select id="selectByGoodId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />,<include refid="Association_Good_Column_List" />,<include refid="Association_Reply_Column_List" />
+        FROM
+        <include refid="Base_Table" />
+        LEFT JOIN <include refid="Good_Table" />
+        ON gd.good_id = g.id
+        LEFT JOIN <include refid="Reply_Table" />
+        ON gd.id = r.good_detail_id
+        AND
+        gd.status = 0
+        AND
+        gd.good_id = #{goodId}
+    </select>
+
+</mapper>

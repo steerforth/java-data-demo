@@ -27,9 +27,13 @@ public class Cart extends BaseEntity<Cart> {
     @Column(name = "user_id")
     @TableField(value = "user_id")
     private long userId;
-    @Column(name = "good_id")
-    @TableField(value = "good_id")
-    private long goodId;
+    /**
+     * Good id
+     */
+    @Column(name = "product_id")
+    @TableField(value = "product_id")
+    @JSONField(name = "product_id")
+    private long productId;
     /**
      * 购物车 商品数量
      */
@@ -71,12 +75,12 @@ public class Cart extends BaseEntity<Cart> {
         this.userId = userId;
     }
 
-    public long getGoodId() {
-        return goodId;
+    public long getProductId() {
+        return productId;
     }
 
-    public void setGoodId(long goodId) {
-        this.goodId = goodId;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     public int getCartNum() {

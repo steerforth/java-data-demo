@@ -67,6 +67,17 @@ public class Good extends BaseEntity<Good> {
      */
     private String image;
     /**
+     * 描述
+     */
+    private String description;
+    /**
+     * 赠送积分
+     */
+    @Column(name = "give_integral")
+    @TableField(value = "give_integral")
+    @JSONField(name="give_integral")
+    private int giveIntegral;
+    /**
      * 是否为促销商品
      */
     private boolean benefit;
@@ -187,10 +198,27 @@ public class Good extends BaseEntity<Good> {
         this.image = image;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getGiveIntegral() {
+        return giveIntegral;
+    }
+
+    public void setGiveIntegral(int giveIntegral) {
+        this.giveIntegral = giveIntegral;
+    }
+
     @Override
     protected Serializable pkVal() {
         return super.getId();
     }
+
 
     @Override
     public String toString() {
@@ -204,12 +232,12 @@ public class Good extends BaseEntity<Good> {
                 ", stock=" + stock +
                 ", storeName='" + storeName + '\'' +
                 ", image='" + image + '\'' +
+                ", description='" + description + '\'' +
+                ", giveIntegral=" + giveIntegral +
                 ", benefit=" + benefit +
                 ", first=" + first +
                 ", hot=" + hot +
                 ", bast=" + bast +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
                 '}';
     }
 }
