@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 08/09/2019 23:35:48
+ Date: 10/09/2019 00:33:18
 */
 
 SET NAMES utf8mb4;
@@ -26,10 +26,10 @@ CREATE TABLE `app_cart` (
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `cart_num` int(11) DEFAULT NULL,
-  `good_id` bigint(20) DEFAULT NULL,
   `status` smallint(6) NOT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `true_price` float DEFAULT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -37,7 +37,7 @@ CREATE TABLE `app_cart` (
 -- Records of app_cart
 -- ----------------------------
 BEGIN;
-INSERT INTO `app_cart` VALUES (111, NULL, NULL, 3, 5, 0, 1, 70.5);
+INSERT INTO `app_cart` VALUES (111, NULL, NULL, 3, 0, 1, 70.5, 5);
 COMMIT;
 
 -- ----------------------------
@@ -86,6 +86,8 @@ CREATE TABLE `app_good` (
   `bast` bit(1) NOT NULL,
   `first` bit(1) NOT NULL,
   `hot` bit(1) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `give_integral` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -93,15 +95,38 @@ CREATE TABLE `app_good` (
 -- Records of app_good
 -- ----------------------------
 BEGIN;
-INSERT INTO `app_good` VALUES (1, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', 1000, 888, 0, 0, 88, '促销品1', '件', NULL, NULL, NULL, b'1', b'0', b'0', b'0');
-INSERT INTO `app_good` VALUES (2, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', 1000, 666, 0, 0, 66, '促销品2', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'1', b'0', b'0', b'0');
-INSERT INTO `app_good` VALUES (3, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 666, NULL, 0, 100, '新商品1', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'1', b'0');
-INSERT INTO `app_good` VALUES (4, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 777, NULL, 0, 100, '新商品2', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'1', b'0');
-INSERT INTO `app_good` VALUES (5, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 777, NULL, 0, 100, '热门商品1', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'0', b'1');
-INSERT INTO `app_good` VALUES (6, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 565, NULL, 0, 100, '热门商品2', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'0', b'1');
-INSERT INTO `app_good` VALUES (7, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 787, NULL, 0, 100, '热门商品3', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'0', b'1');
-INSERT INTO `app_good` VALUES (8, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 787, 1000, 0, 100, '精品商品1', '件', 555, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'1', b'0', b'0');
-INSERT INTO `app_good` VALUES (9, 'http://127.0.0.1:8000/demo/static/images/bast-2.jpeg', NULL, 787, 1000, 0, 100, '精品商品2', '件', 555, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'1', b'0', b'0');
+INSERT INTO `app_good` VALUES (1, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', 1000, 888, 0, 0, 88, '促销品1', '件', NULL, NULL, NULL, b'1', b'0', b'0', b'0', NULL, NULL);
+INSERT INTO `app_good` VALUES (2, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', 1000, 666, 0, 0, 66, '促销品2', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'1', b'0', b'0', b'0', NULL, NULL);
+INSERT INTO `app_good` VALUES (3, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 666, NULL, 0, 100, '新商品1', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'1', b'0', NULL, NULL);
+INSERT INTO `app_good` VALUES (4, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 777, NULL, 0, 100, '新商品2', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'1', b'0', NULL, NULL);
+INSERT INTO `app_good` VALUES (5, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', 1111, 777, 500, 0, 100, '热门商品1', '件', 444, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'0', b'1', '个公开化了', 50);
+INSERT INTO `app_good` VALUES (6, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 565, NULL, 0, 100, '热门商品2', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'0', b'1', NULL, NULL);
+INSERT INTO `app_good` VALUES (7, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 787, NULL, 0, 100, '热门商品3', '件', NULL, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'0', b'0', b'1', NULL, NULL);
+INSERT INTO `app_good` VALUES (8, 'http://127.0.0.1:8000/demo/static/images/bast-1.jpeg', NULL, 787, 1000, 0, 100, '精品商品1', '件', 555, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'1', b'0', b'0', NULL, NULL);
+INSERT INTO `app_good` VALUES (9, 'http://127.0.0.1:8000/demo/static/images/bast-2.jpeg', NULL, 787, 1000, 0, 100, '精品商品2', '件', 555, '2019-09-06 15:52:27', '2019-09-06 15:52:30', b'0', b'1', b'0', b'0', NULL, NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for app_good_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `app_good_detail`;
+CREATE TABLE `app_good_detail` (
+  `id` bigint(20) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `good_id` varchar(255) DEFAULT NULL,
+  `price_name` varchar(255) DEFAULT NULL,
+  `reply_count` int(11) DEFAULT NULL,
+  `reply_chance` smallint(6) DEFAULT NULL,
+  `status` smallint(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of app_good_detail
+-- ----------------------------
+BEGIN;
+INSERT INTO `app_good_detail` VALUES (1, NULL, NULL, '5', '放大镜来看发', 2, 98, 0);
 COMMIT;
 
 -- ----------------------------
@@ -132,6 +157,34 @@ INSERT INTO `app_menu` VALUES (5, '菜单5', 'http://127.0.0.1:8000/demo/static/
 COMMIT;
 
 -- ----------------------------
+-- Table structure for app_reply
+-- ----------------------------
+DROP TABLE IF EXISTS `app_reply`;
+CREATE TABLE `app_reply` (
+  `id` bigint(20) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `add_time` datetime DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  `good_detail_id` varchar(255) DEFAULT NULL,
+  `merchant_reply_content` varchar(255) DEFAULT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `star` smallint(6) NOT NULL,
+  `status` smallint(6) NOT NULL,
+  `suk` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of app_reply
+-- ----------------------------
+BEGIN;
+INSERT INTO `app_reply` VALUES (1, NULL, NULL, '2019-09-09 21:35:29', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqmxLANU2J4hzibNO0p2OFsd8wMyHqHNuAyY0BMb4qUiaO5RcyEXRuzuqTBQMtXjicicvdzCNMUia9HnBA/132', '很好不错', '1', '谢谢！', 'test1', 3, 0, 'ggg');
+INSERT INTO `app_reply` VALUES (2, NULL, NULL, '2019-09-17 21:35:29', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqmxLANU2J4hzibNO0p2OFsd8wMyHqHNuAyY0BMb4qUiaO5RcyEXRuzuqTBQMtXjicicvdzCNMUia9HnBA/132', '好评哦', '1', '谢谢！您的支持', 'test2', 5, 0, 'ffff');
+COMMIT;
+
+-- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
@@ -157,6 +210,7 @@ CREATE TABLE `sys_user` (
   `spread_code` bigint(20) DEFAULT NULL,
   `spread_spid` bigint(20) DEFAULT NULL,
   `unionid` varchar(255) DEFAULT NULL,
+  `is_promoter` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -164,7 +218,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_user` VALUES (1, 'admin', '2019-09-06 12:04:59', 'admin', '123456', '1', NULL, 0, '2019-09-06 12:05:07', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqmxLANU2J4hzibNO0p2OFsd8wMyHqHNuAyY0BMb4qUiaO5RcyEXRuzuqTBQMtXjicicvdzCNMUia9HnBA/132', NULL, NULL, 1, NULL, 'steer', NULL, NULL, 'oA7cI0aHhaVe9LVdFSOXDWlZtJIw', NULL, NULL, NULL);
+INSERT INTO `sys_user` VALUES (1, 'admin', '2019-09-06 12:04:59', 'admin', '123456', '1', NULL, 0, '2019-09-06 12:05:07', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqmxLANU2J4hzibNO0p2OFsd8wMyHqHNuAyY0BMb4qUiaO5RcyEXRuzuqTBQMtXjicicvdzCNMUia9HnBA/132', NULL, NULL, 1, NULL, 'steer', NULL, NULL, 'oA7cI0aHhaVe9LVdFSOXDWlZtJIw', NULL, NULL, NULL, b'1');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
