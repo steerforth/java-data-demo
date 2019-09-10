@@ -52,6 +52,7 @@ public class Cart extends BaseEntity<Cart> {
      *  ========冗余========
      */
     @Transient
+    @TableField(exist = false)
     private Good productInfo;
 
     @Override

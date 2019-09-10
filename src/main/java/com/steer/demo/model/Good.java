@@ -9,7 +9,9 @@ import com.steer.demo.common.model.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Program: demo
@@ -67,7 +69,7 @@ public class Good extends BaseEntity<Good> {
      */
     private String image;
     /**
-     * 描述
+     * 产品介绍/描述
      */
     private String description;
     /**
@@ -93,6 +95,24 @@ public class Good extends BaseEntity<Good> {
      * 是否为精品商品
      */
     private boolean bast;
+
+    /**
+     * 商品详情页 滑动的介绍图
+     */
+    @Transient
+    @TableField(exist = false)
+    @JSONField(name = "slider_image")
+    private List<String> sliderImage;
+
+    /**
+     * =============荣余字段===============
+     */
+    /**
+     *  附加属性
+     */
+    @Transient
+    @TableField(exist = false)
+    private AttrInfo attrInfo;
 
     public boolean isFirst() {
         return first;
@@ -212,6 +232,14 @@ public class Good extends BaseEntity<Good> {
 
     public void setGiveIntegral(int giveIntegral) {
         this.giveIntegral = giveIntegral;
+    }
+
+    public List<String> getSliderImage() {
+        return sliderImage;
+    }
+
+    public void setSliderImage(List<String> sliderImage) {
+        this.sliderImage = sliderImage;
     }
 
     @Override
