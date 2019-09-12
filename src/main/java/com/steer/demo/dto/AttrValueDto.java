@@ -8,7 +8,6 @@ package com.steer.demo.dto;
  */
 public class AttrValueDto {
     private String attr;
-    private boolean check;
 
     public String getAttr() {
         return attr;
@@ -18,11 +17,4 @@ public class AttrValueDto {
         this.attr = attr;
     }
 
-    public boolean isCheck() {
-        return check;
-    }
-
-    public void setCheck(boolean check) {
-        this.check = check;
-    }
 }
