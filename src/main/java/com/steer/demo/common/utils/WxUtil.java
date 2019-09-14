@@ -60,7 +60,7 @@ public class WxUtil {
 
     public static String buildXmlParam(Map<String, String> packageParams,String sign){
         StringBuffer buffer = new StringBuffer();
-        buffer.append("<xml version=\"1.0\" encoding=\"gbk\">").
+        buffer.append("<xml>").
                 append("<appid>").append(packageParams.get("appid")).append("</appid>").
                 append("<body><![CDATA[").append(packageParams.get("body")).append("]]></body>").
                 append("<mch_id>").append(packageParams.get("mch_id")).append("</mch_id>").
