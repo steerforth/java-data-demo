@@ -34,6 +34,7 @@ public class WechatPayTest extends DemoApplicationTests {
             String nonce_str = WxUtil.getRandomStrByLen(32);
             //商品名称 
 //            String body = new String("天天爱消除-会员充值".getBytes("ISO-8859-1"),"UTF-8");
+            //APP名字-商品概述
             String body = "天天爱消除-会员充值";
             //服务器ip
             String spbill_create_ip = "192.168.2.110";
@@ -68,10 +69,10 @@ public class WechatPayTest extends DemoApplicationTests {
             LOGGER.info("url拼接字符串:{}",prestr);
 
             //MD5运算生成签名，这里是第一次签名，用于调用统一下单接口
-            String mysign = WxUtil.sign(prestr, key, "utf-8");
-            LOGGER.info("======第一次签名:[{}],大小:{}=======",mysign,mysign.length());
+            String signValue = WxUtil.sign(prestr, key, "utf-8");
+            LOGGER.info("======第一次签名:[{}],大小:{}=======",signValue,signValue.length());
 
-            String xml = WxUtil.buildXmlParam(packageParams,mysign);
+            String xml = WxUtil.buildXmlParam(packageParams,signValue);
             LOGGER.info("请求xml:[{}]",xml);
 
             String url = "https://api.mch.weixin.qq.com/pay/unifiedorder";

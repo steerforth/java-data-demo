@@ -5,6 +5,7 @@ import org.springframework.util.DigestUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WxUtil {
 
@@ -91,4 +92,17 @@ public class WxUtil {
     }
 
 
+    public static Map<String,String> paraFilter(Map<String,String> map) {
+       return map.entrySet().stream().filter(entry->checkValue(entry)).collect(Collectors.toMap(e->e.getKey(),e->e.getValue()));
+    }
+
+    private static boolean checkValue(Map.Entry<String,String> entry) {
+        if (StringUtil.isBlank(entry.getValue())){
+            return false;
+        }
+        if (entry.getKey().equalsIgnoreCase("sign_type") || entry.getKey().equalsIgnoreCase("sign")){
+            return false;
+        }
+        return true;
+    }
 }

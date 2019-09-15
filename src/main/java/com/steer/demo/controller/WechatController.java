@@ -59,4 +59,6 @@ public class WechatController {
         LOGGER.info("save form id:{}",formId);
         return Result.successReult();
     }
+
+
 }

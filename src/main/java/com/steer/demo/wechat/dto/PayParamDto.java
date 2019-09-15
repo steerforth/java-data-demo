@@ -6,6 +6,7 @@ public class PayParamDto {
     private long timestamp;
     private String nonceStr;
     @JSONField(name = "package")
+    @XStreamAlias("package")
     private String prepayId;
     private String signType;
     private String paySign;
