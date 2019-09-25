@@ -59,24 +59,6 @@ public class WxUtil {
         return DigestUtils.md5DigestAsHex(text.getBytes(input_charset)).toUpperCase();
     }
 
-    public static String buildXmlParam(Map<String, String> packageParams,String sign){
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("<xml>").
-                append("<appid>").append(packageParams.get("appid")).append("</appid>").
-                append("<body><![CDATA[").append(packageParams.get("body")).append("]]></body>").
-                append("<mch_id>").append(packageParams.get("mch_id")).append("</mch_id>").
-                append("<nonce_str>").append(packageParams.get("nonce_str")).append("</nonce_str>").
-                append("<notify_url>").append(packageParams.get("notify_url")).append("</notify_url>").
-                append("<openid>").append(packageParams.get("openid")).append("</openid>").
-                append("<out_trade_no>").append(packageParams.get("out_trade_no")).append("</out_trade_no>").
-                append("<spbill_create_ip>").append(packageParams.get("spbill_create_ip")).append("</spbill_create_ip>").
-                append("<total_fee>").append(packageParams.get("total_fee")).append("</total_fee>").
-                append("<trade_type>").append(packageParams.get("trade_type")).append("</trade_type>").
-                append("<sign>").append(sign).append("</sign>").
-                append("</xml>");
-        return buffer.toString();
-    }
-
     public static Map<String, String> doXmlParse(String xml) throws DocumentException {
         Document document = DocumentHelper.parseText(xml);
         Element rootElement = document.getRootElement();
